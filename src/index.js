@@ -21,6 +21,10 @@ io.on("connection", (socket) => {
   //message
   socket.emit("message", "welcome");
 
+  socket.on("sendMessage", (message) => {
+    io.emit("message", message);
+  });
+
   // socket.emit("countUpdated", count);
 
   // socket.on("increment", () => {
