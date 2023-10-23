@@ -20,3 +20,18 @@ document.querySelector("#message-form").addEventListener("submit", (e) => {
 //   console.log("clicked");
 //   socket.emit("increment");
 // });
+
+document.querySelector("#send-location").addEventListener("click", () => {
+  if (!navigator.geolocation) {
+    return alert("Geolocation not ssupported");
+  }
+
+  navigator.geolocation.getCurrentPosition((position) => {
+    // console.log(position);
+
+    socket.emit("sendLocation", {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+    });
+  });
+});
