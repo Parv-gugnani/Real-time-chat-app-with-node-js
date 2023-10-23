@@ -18,11 +18,20 @@ let count = 0;
 io.on("connection", (socket) => {
   console.log("new websocket connections");
 
-  //message
+  //defaut message
   socket.emit("message", "welcome");
+  socket.broadcast.emit("message", "A new user has joined");
+
+  // send message
 
   socket.on("sendMessage", (message) => {
     io.emit("message", message);
+  });
+
+  // when user leaves
+
+  socket.on("disconnect", () => {
+    io.emit("message", "A user has left");
   });
 
   // socket.emit("countUpdated", count);
