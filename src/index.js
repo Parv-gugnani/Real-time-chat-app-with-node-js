@@ -18,7 +18,10 @@ let count = 0;
 io.on("connection", (socket) => {
   console.log("new websocket connections");
 
-  socket.emit("countUpdated", count);
+  //message
+  socket.emit("message", "welcome");
+
+  // socket.emit("countUpdated", count);
 
   // socket.on("increment", () => {
   //   count++;
