@@ -24,8 +24,9 @@ io.on("connection", (socket) => {
 
   // send message
 
-  socket.on("sendMessage", (message) => {
+  socket.on("sendMessage", (message, callback) => {
     io.emit("message", message);
+    callback("Delivered");
   });
 
   // when user leaves
