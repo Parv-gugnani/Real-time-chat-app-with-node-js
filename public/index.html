@@ -7,13 +7,21 @@
     <link rel="icon" href="p.ico" />
   </head>
   <body>
-    This Is chat App
+    Chat App
+
+    <div id="messages"></div>
 
     <form id="message-form">
       <input name="message" placeholder="Message" />
       <button>Send</button>
     </form>
     <button id="send-location">Send Location</button>
+
+    <script id="message-template" type="text/html">
+      <div>
+        <p>This is message</p>
+      </div>
+    </script>
 
     <!-- scripts -->
 
