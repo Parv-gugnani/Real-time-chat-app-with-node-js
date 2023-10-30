@@ -40,7 +40,7 @@ const removeUser = (id) => {
   }
 };
 // getuser data
-const getUser = () => {
+const getUser = (id) => {
   return users.find((user) => user.id === id);
 };
 
