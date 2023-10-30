@@ -20,8 +20,19 @@ app.use(express.static(publicDirectoryPath)); // Fix the missing parenthesis
 io.on("connection", (socket) => {
   console.log("New WebSocket connection");
 
-  socket.emit("message", generateMessage("Welcome!"));
-  socket.broadcast.emit("message", generateMessage("A New User Has Joined!"));
+  socket.on("Join", ({ username, password }) => {
+    socket.join(room);
+
+    // message
+
+    // ony room will join
+    socket.emit("message", generateMessage("Welcome!"));
+    socket.broadcast
+      .to(room)
+      .emit("message", generateMessage(`${username} has joined !`));
+
+    //socket.emit
+  });
 
   socket.on("sendMessage", (message, callback) => {
     const filter = new Filter();

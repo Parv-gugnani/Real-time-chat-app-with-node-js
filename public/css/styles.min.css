@@ -9,6 +9,7 @@ html {
 }
 
 input {
+    border-radius: 10px;
     font-size: 14px;
 }
 
@@ -38,6 +39,7 @@ input {
 }
 
 button {
+
     cursor: pointer;
     padding: 12px;
     background: #219ebc;
@@ -46,6 +48,7 @@ button {
     color: #fff;
     font-size: 16px;
     transition: background .3s ease;
+    border-radius: 10px;
 }
 
 button:hover {
