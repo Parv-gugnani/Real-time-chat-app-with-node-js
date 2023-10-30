@@ -16,7 +16,10 @@ app.use(express.static(publicDirectoryPath)); // Fix the missing parenthesis
 io.on("connection", (socket) => {
   console.log("New WebSocket connection");
 
-  socket.emit("message", "Welcome!");
+  socket.emit("message", {
+    text: "Welcome!",
+    createdAt: new Date().getTime(),
+  });
   socket.broadcast.emit("message", "A new user has joined!");
 
   socket.on("sendMessage", (message, callback) => {
