@@ -1,19 +1,19 @@
 const socket = io();
 
-//elements
+// Elements
 const $messageForm = document.querySelector("#message-form");
-const $messageFormInput = document.querySelector("input");
-const $messageFormButton = document.querySelector("button");
+const $messageFormInput = $messageForm.querySelector("input");
+const $messageFormButton = $messageForm.querySelector("button");
 const $sendLocationButton = document.querySelector("#send-location");
 const $messages = document.querySelector("#messages");
 
-// templates
+// Templates
 const messageTemplate = document.querySelector("#message-template").innerHTML;
 const locationMessageTemplate = document.querySelector(
   "#location-message-template"
 ).innerHTML;
 
-// options
+// Options
 const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
@@ -36,7 +36,7 @@ socket.on("locationMessage", (message) => {
   $messages.insertAdjacentHTML("beforeend", html);
 });
 
-document.querySelector("#message-form").addEventListener("submit", (e) => {
+$messageForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
   $messageFormButton.setAttribute("disabled", "disabled");
@@ -48,7 +48,6 @@ document.querySelector("#message-form").addEventListener("submit", (e) => {
     $messageFormInput.value = "";
     $messageFormInput.focus();
 
-    //
     if (error) {
       return console.log(error);
     }

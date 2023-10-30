@@ -15,23 +15,21 @@ const io = socketio(server);
 const port = process.env.PORT || 3000;
 const publicDirectoryPath = path.join(__dirname, "../public");
 
-app.use(express.static(publicDirectoryPath)); // Fix the missing parenthesis
+app.use(express.static(publicDirectoryPath));
 
 io.on("connection", (socket) => {
   console.log("New WebSocket connection");
 
-  socket.on("Join", ({ username, password }) => {
+  socket.on("join", ({ username, room }) => {
     socket.join(room);
 
-    // message
-
-    // ony room will join
     socket.emit("message", generateMessage("Welcome!"));
     socket.broadcast
       .to(room)
-      .emit("message", generateMessage(`${username} has joined !`));
+      .emit("message", generateMessage(`${username} has joined!`));
 
-    //socket.emit
+    // socket.emit, io.emit, socket.broadcast.emit
+    // io.to.emit, socket.broadcast.to.emit
   });
 
   socket.on("sendMessage", (message, callback) => {
@@ -41,7 +39,7 @@ io.on("connection", (socket) => {
       return callback("Profanity is not allowed!");
     }
 
-    io.emit("message", generateMessage(message));
+    io.to("Center City").emit("message", generateMessage(message));
     callback();
   });
 
@@ -61,5 +59,5 @@ io.on("connection", (socket) => {
 });
 
 server.listen(port, () => {
-  console.log(`Server is up on port http://localhost:${port}`);
+  console.log(`Server is up on port ${port}!`);
 });
