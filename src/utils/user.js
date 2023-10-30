@@ -49,16 +49,3 @@ const getUserInRoom = (room) => {
   room = room.trim().toLowerCase();
   return users.filter((user) => user.room === room);
 };
-
-//
-
-const user = getUser(42);
-console.log(user);
-
-const userList = getUserInRoom("");
-// debugging
-addUsers({ id: 22, username: "Andrew", room: "   South Philly" });
-addUsers({ id: 22, username: "randy", room: "   South Philly" });
-addUsers({ id: 42, username: "Parv", room: "Center city" });
-
-console.log(users);
