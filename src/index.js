@@ -8,7 +8,12 @@ const {
   generateLocationMessage,
 } = require("./utils/messages");
 
-const { addUser, removeUser, getUser, getUserInRoom } = require("./utils/user");
+const {
+  addUser,
+  removeUser,
+  getUser,
+  getUsersInRoom,
+} = require("./utils/user");
 
 const app = express();
 const server = http.createServer(app);
@@ -45,7 +50,7 @@ io.on("connection", (socket) => {
     // user data
     io.to(user.room).emit("roomData", {
       room: user.room,
-      user: getUserInRoom(user.room),
+      user: getUsersInRoom(user.room),
     });
 
     // confirming
@@ -90,7 +95,7 @@ io.on("connection", (socket) => {
       );
       io.to(user.room).emit("roomData", {
         room: user.room,
-        users: getUserInRoom(user.room),
+        users: getUsersInRoom(user.room),
       });
     }
   });
