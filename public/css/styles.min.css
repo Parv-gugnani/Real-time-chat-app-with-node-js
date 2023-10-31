@@ -15,7 +15,7 @@ input {
 
 body {
     line-height: 1.4;
-    color: #333;
+    color: #023047;
     font-family: Helvetica, Arial, sans-serif;
     background-color: #ffb703;
     /* Updated background color */
@@ -93,12 +93,15 @@ button:disabled {
     display: flex;
 }
 
+
+
 .chat__sidebar {
     height: 100vh;
     color: #fff;
-    background: #333744;
+    background: #023047;
     width: 225px;
     overflow-y: scroll;
+    font-family: 'Segoe UI';
 }
 
 .chat__main {
@@ -159,21 +162,21 @@ button:disabled {
 }
 
 .room-title {
-    font-weight: 400;
+    font-weight: 800;
     font-size: 22px;
-    background: #2c2f3a;
-    padding: 24px;
+    background: #02202e;
+    padding: 20px;
 }
 
 .list-title {
     font-weight: 500;
     font-size: 18px;
     margin-bottom: 4px;
-    padding: 12px 24px 0;
+    padding: 20px 20px 0;
 }
 
 .users {
     list-style-type: none;
     font-weight: 300;
-    padding: 12px 24px 0;
+    padding: 13px 32px 0;
 }
