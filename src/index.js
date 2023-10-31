@@ -52,6 +52,7 @@ io.on("connection", (socket) => {
 
     callback();
   });
+  //
 
   socket.on("sendMessage", (message, callback) => {
     const user = getUser(socket.id);
