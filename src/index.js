@@ -7,7 +7,6 @@ const {
   generateMessage,
   generateLocationMessage,
 } = require("./utils/messages");
-
 const {
   addUser,
   removeUser,
@@ -27,8 +26,8 @@ app.use(express.static(publicDirectoryPath));
 io.on("connection", (socket) => {
   console.log("New WebSocket connection");
 
-  socket.on("join", (Options, callback) => {
-    const { error, user } = addUser({ id: socket.id, ...Options });
+  socket.on("join", (options, callback) => {
+    const { error, user } = addUser({ id: socket.id, ...options });
 
     if (error) {
       return callback(error);
@@ -36,28 +35,19 @@ io.on("connection", (socket) => {
 
     socket.join(user.room);
 
-    socket.emit(
-      "message",
-      generateMessage("Admin", `Welcome to the ${user.room}`)
-    );
+    socket.emit("message", generateMessage("Admin", "Welcome!"));
     socket.broadcast
       .to(user.room)
       .emit(
         "message",
         generateMessage("Admin", `${user.username} has joined!`)
       );
-
-    // user data
     io.to(user.room).emit("roomData", {
       room: user.room,
-      user: getUsersInRoom(user.room),
+      users: getUsersInRoom(user.room),
     });
 
-    // confirming
     callback();
-
-    // socket.emit, io.emit, socket.broadcast.emit
-    // io.to.emit, socket.broadcast.to.emit
   });
 
   socket.on("sendMessage", (message, callback) => {
@@ -87,9 +77,8 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     const user = removeUser(socket.id);
 
-    // if the user never joined or just skipped form outside then we dont want to send this message to every in the server
     if (user) {
-      io.emit(
+      io.to(user.room).emit(
         "message",
         generateMessage("Admin", `${user.username} has left!`)
       );
