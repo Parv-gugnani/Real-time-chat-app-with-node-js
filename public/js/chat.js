@@ -28,6 +28,8 @@ socket.on("message", (message) => {
   $messages.insertAdjacentHTML("beforeend", html);
 });
 
+//location message
+
 socket.on("locationMessage", (message) => {
   console.log(message);
   const html = Mustache.render(locationMessageTemplate, {
@@ -36,6 +38,12 @@ socket.on("locationMessage", (message) => {
     createdAt: moment(message.createdAt).format("h:mm a"),
   });
   $messages.insertAdjacentHTML("beforeend", html);
+});
+
+// room data
+socket.on("roomData", ({ room, users }) => {
+  console.log(room);
+  console.log(users);
 });
 
 $messageForm.addEventListener("submit", (e) => {
