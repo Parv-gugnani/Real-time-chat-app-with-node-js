@@ -12,7 +12,7 @@ const {
   removeUser,
   getUser,
   getUsersInRoom,
-} = require("./utils/user");
+} = require("./utils/users");
 
 const app = express();
 const server = http.createServer(app);
@@ -35,10 +35,7 @@ io.on("connection", (socket) => {
 
     socket.join(user.room);
 
-    socket.emit(
-      "message",
-      generateMessage("Admin", `Welcome to ${user.room}!`)
-    );
+    socket.emit("message", generateMessage("Admin", "Welcome!"));
     socket.broadcast
       .to(user.room)
       .emit(
@@ -52,7 +49,6 @@ io.on("connection", (socket) => {
 
     callback();
   });
-  //
 
   socket.on("sendMessage", (message, callback) => {
     const user = getUser(socket.id);
@@ -95,5 +91,5 @@ io.on("connection", (socket) => {
 });
 
 server.listen(port, () => {
-  console.log(`Server is up on port http://localhost:${port}`);
+  console.log(`Server is up on port ${port}!`);
 });
