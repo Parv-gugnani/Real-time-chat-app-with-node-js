@@ -3,6 +3,8 @@ const http = require("http");
 const express = require("express");
 const socketio = require("socket.io");
 const Filter = require("bad-words");
+const cors = require("cors");
+
 const {
   generateMessage,
   generateLocationMessage,
@@ -22,6 +24,14 @@ const port = process.env.PORT || 3000;
 const publicDirectoryPath = path.join(__dirname, "../public");
 
 app.use(express.static(publicDirectoryPath));
+
+app.use(
+  cors({
+    origin: "https://realtime-parv-chat.vercel.app/",
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 
 io.on("connection", (socket) => {
   console.log("New WebSocket connection");
